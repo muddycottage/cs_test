@@ -9,11 +9,16 @@ public class PricingStructureRespository {
 	Map <String, PricingStructure> pricingData ;
 	
 	public PricingStructureRespository () {
-		// simulate data held in a DB somewhere
+		// simulate data held in a DB somewhere, not needed in the real world
 		createPricingData();
 	}
 
-	public PricingStructure find(String name) {
+	   /**
+	    * find - find the pricing structure for the specified product
+	    * 
+	    * @param productName	Identifies the product
+	    * @return pricingStructure or null if not found
+	    */	public PricingStructure find(String name) {
 		// be null safe ....
 		return (pricingData == null) ? null : pricingData.get(name) ;
 	}

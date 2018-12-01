@@ -1,13 +1,27 @@
 package cs_test;
 
+/** PricingService - calculates the sub-total for a set of products
+ * 
+ * @author Christopher Atkinson
+ * @version 1Dec2018
+ */
 public class PricingService {
 	
+	// in a Spring Boot (or similar) environment, this would be @Autowired
 	PricingStructureRespository pricingStructureRespository ;
 	
 	public PricingService () {
+		// if the repo is @Autowired, this constuction is not required
 		pricingStructureRespository = new PricingStructureRespository() ;
 	}
 	
+	   /**
+	    * getSubTotal computes the sub-total cost of a set of product, applying any volume pricing
+	    * 
+	    * @param productName	Identifies the product
+	    * @param itemCount		The number of items of this product in the basket
+	    * @return total cost of the items or zero if the product is not recognised
+	    */	
 	Double getSubTotal (String productName, Long itemCount) {
 		
 		Double subTotal ;

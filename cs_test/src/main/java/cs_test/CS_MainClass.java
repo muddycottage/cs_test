@@ -6,11 +6,22 @@ import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
-public class MainClass {
+
+/** CS_MainClass - provides a simple way of invoking the sample exercise 
+ * 
+ * @author Christopher Atkinson
+ * @version 1Dec2018
+ */
+
+// please see the readme.md file for an intro ...
+
+public class CS_MainClass {
+	
+	// in a Spring Boot (or similar) environment, this would be @Autowired
 	private PricingService pricingService = new PricingService() ;
 	
 	public static void main(String[] args) {
-		MainClass mainClass = new MainClass() ;
+		CS_MainClass mainClass = new CS_MainClass() ;
 		
 		mainClass.doit();
 	}
@@ -20,14 +31,15 @@ public class MainClass {
 		// create a basket of purchases
 		List<String> basket = createBasket() ;
 		
+		// now price the basket
 		// create a map of products with counts of each
 		Map<String, Long> productCounts = basket.stream().collect(Collectors.groupingBy(p -> p, Collectors.counting()));
 		
 		// Note to keep this exercise duration short, we are using a Double to hold the basket total.
 		// In the real-world one would use BigDecimal or JavaMoney to manage precision and rounding,
-		// but this would require a custom collector instead of the summingDouble (which is available out of the box)
+		// but this would require a custom collector instead of the out-of-the-box summingDouble
 		//
-		// This custom collector might not simply add the chosen numeric representation but could be extended to
+		// However, the custom collector might not just simply add the chosen numeric representation but could be extended to
 		// return useful stuff like "could not find product X" and "you saved £x.xx on the offers"
 		
 		Double basketTotal ;
@@ -60,7 +72,7 @@ public class MainClass {
 		System.out.println();
 	}
 	
-	// utility methods
+	// utility method
 	
 	private List<String> createBasket () {
 		List<String> purchases = new ArrayList<> () ;
