@@ -14,14 +14,19 @@ public class PricingStructure {
 	private String productName ; // the name of the item in the basket e.g. "Apple"
 	private Double price ; // price of a single item
 	private Long groupCount ; // number items which qualify for a price reduction - eg the "3' in "3 for 2"
+	private Long lowerCount ;
 	private Double priceRatio ; // ratio by which the group price is reduced = eg 2/3 for "3 for 2"
 	
-	public PricingStructure(String productName, Double price, Long groupCount, Double priceRatio) {
+	public PricingStructure(String productName, Double price, Long groupCount, Long lowerCount) {
 		super();
 		this.productName = productName;
 		this.price = price;
 		this.groupCount = groupCount;
-		this.priceRatio = priceRatio;
+		this.lowerCount = lowerCount ;
+		
+		if ((groupCount != null) && (lowerCount != null)) {
+			 this.priceRatio = new Double (lowerCount) ;
+		}
 	}
 	
 	public String getProductName() {
@@ -49,6 +54,16 @@ public class PricingStructure {
 		this.priceRatio = priceRatio;
 	}
 	
+	public Boolean isPromotion () {
+		return ( (groupCount != null) && (groupCount != 0) && (lowerCount != null) && (lowerCount != 0) ) ;
+	}
+	public String getPromotion (Long itemCount) {
+		if (isPromotion()) {
+			return String.format("Buy %s %d for %d", productName, groupCount, lowerCount) ;
+		}
+		
+		return null ;
+	}
 	public Double calculateGroupPrice (Long itemCount) {
 		Double totalPrice ;
 		

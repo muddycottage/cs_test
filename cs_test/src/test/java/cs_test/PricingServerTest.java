@@ -24,7 +24,7 @@ public class PricingServerTest {
 	public void setup() {
 		doAnswer((i) -> { return null ; }).when(pricingStructureRespository).find(eq("Curry")) ;
 		doAnswer((i) -> { return new PricingStructure("Apple", new Double("0.40"), null, null) ; }).when(pricingStructureRespository).find(eq("Apple")) ;
-		doAnswer((i) -> { return new PricingStructure("Lime", new Double("0.25"), new Long("3"), new Double("2.0")) ; }).when(pricingStructureRespository).find(eq("Lime")) ;
+		doAnswer((i) -> { return new PricingStructure("Lime", new Double("0.25"), 3L, 2L) ; }).when(pricingStructureRespository).find(eq("Lime")) ;
 		
 	}
 	@Test

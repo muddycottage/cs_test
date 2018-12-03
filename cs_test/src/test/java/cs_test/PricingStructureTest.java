@@ -23,7 +23,7 @@ public class PricingStructureTest {
 		result = pricingStructure.calculateGroupPrice(3L) ;
 		assertEquals(new Double("1.2"), result);
 		
-		pricingStructure = new PricingStructure("Apple", new Double("0.50"), new Long("2"), new Double("1.0")) ;
+		pricingStructure = new PricingStructure("Apple", new Double("0.50"), 2L, 1L) ;
 		result = pricingStructure.calculateGroupPrice(0L) ;
 		assertEquals(new Double("0.0"), result);
 		result = pricingStructure.calculateGroupPrice(1L) ;

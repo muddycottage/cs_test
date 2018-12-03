@@ -22,12 +22,12 @@ public class PricingStructureRespository {
 	private void createPricingData () {
 		addPriceData ("Apple", null, new Double("0.35"), null, null) ;
 		addPriceData ("Banana", null, new Double("0.20"), null, null) ;
-		addPriceData ("Melon", null, new Double("0.50"), new Long("2"), new Double("1.0")) ;
-		addPriceData ("Lime", null, new Double("0.15"), new Long("3"), new Double("2.0")) ;
+		addPriceData ("Melon", null, new Double("0.50"), 2L, 1L) ;
+		addPriceData ("Lime", null, new Double("0.15"), 3L, 2L) ;
 	}
 	
-	private void addPriceData (String productName, String groupName, Double price, Long groupCount, Double priceRatio) {
-		PricingStructure pricingStructure = new PricingStructure(productName, price, groupCount, priceRatio) ;
+	private void addPriceData (String productName, String groupName, Double price, Long groupCount, Long lowerCount) {
+		PricingStructure pricingStructure = new PricingStructure(productName, price, groupCount, lowerCount) ;
 		
 		if (pricingData == null) {
 			pricingData = new HashMap<>() ;

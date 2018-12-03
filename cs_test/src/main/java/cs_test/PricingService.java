@@ -8,6 +8,21 @@ public class PricingService {
 		pricingStructureRespository = new PricingStructureRespository() ;
 	}
 	
+	BasketItem getBasketItem (String productName, Long itemCount) {
+		BasketItem basketItem = new BasketItem (productName, itemCount) ;
+		
+		// get the pricing structure for this product
+		PricingStructure pricingStructure = pricingStructureRespository.find(productName);
+		if (pricingStructure != null) {
+			Double price = pricingStructure.calculateGroupPrice(itemCount);
+			basketItem.setPrice(price) ;
+		
+			String promotion = pricingStructure.getPromotion(itemCount) ;
+			basketItem.setPromotion(promotion) ;
+		}
+
+		return basketItem ;
+	}
 	Double getSubTotal (String productName, Long itemCount) {
 		
 		Double subTotal ;
