@@ -4,6 +4,8 @@ public class BasketSummary {
 
 	String state ;
 	
+	public BasketSummary (BasketBuilder bb) {} 
+	
 	public BasketSummary called (String s) {
 		System.out.println("BS called " + s);
 		return this ;

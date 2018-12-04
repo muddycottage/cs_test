@@ -1,9 +1,13 @@
 package cs_test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -59,26 +63,34 @@ public class CS_MainClass {
 		//basketTotal = Stream.of(productCounts).collect(Collectors.summingDouble((k,v) -> pricingService.getSubTotal(k, v))) ;
 
 		Object obj = productCounts.entrySet().stream().collect(new BasketCollector()) ;
-		//System.out.println(String.format("Done1 %s", obj.toString() ) ) ;
+		System.out.println(String.format("Done1 %s", obj.toString() ) ) ;
 
 		BasketBuilder bb = (BasketBuilder) obj ;
-		bb.printBasket() ;
-//		System.out.println(String.format("Done2 %s", bb.toString() ) ) ;
+		bb.printBasket();
 		
-		// old school ....
+/*		Collector<Map<String, Long>, ?, BasketSummary> toBasket =
+				  Collector.of(BasketSummary::new, BasketSummary::add, 
+				    (first, second) -> { 
+				       first.add(second); 
+				       return first; 
+				    });
 		
-/*		basketTotal = new Double("0.0") ;
-		for (Map.Entry<String, Long> mapEntry : productCounts.entrySet()) {
-			String productName = mapEntry.getKey() ;
-			Long itemCount = mapEntry.getValue() ;
-			Double subTotal = pricingService.getSubTotal(productName, itemCount) ;
+		BasketSummary basketSummary = productCounts.entrySet().stream().collect(toBasket);*/
+		
+	
+		List<BasketItem> productList =	Arrays.asList(new BasketItem("apple", 1L),
+				  new BasketItem("orange", 2L)) ;
+		
+		Collector<BasketItem, ?, LinkedList<BasketItem>> toLinkedList =
+				  Collector.of(LinkedList::new, LinkedList::add, 
+				    (first, second) -> { 
+				       first.addAll(second); 
+				       return first; 
+				    });
+				 
 
-			if (subTotal != null)
-				basketTotal += subTotal ;
-			
-			// show how the basket price being built up ....
-			System.out.println(String.format("%s %s %f %f", productName, itemCount, subTotal, basketTotal));
-		}*/
+		LinkedList<BasketItem> linkedListOfPersons =
+				  productList.stream().collect(toLinkedList);
 	}
 	
 	// utility method

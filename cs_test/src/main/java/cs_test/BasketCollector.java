@@ -36,7 +36,7 @@ public class BasketCollector implements Collector <Map.Entry<String, Long>,  Bas
 	@Override
 	// A, R
 	public Function<BasketBuilder, BasketSummary> finisher() {
-		return null ;
+		return BasketSummary::new ;
 	}
 
 	@Override
